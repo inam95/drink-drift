@@ -5,7 +5,7 @@ import { navLinks } from "@/constants/nav-links";
 
 export function Navbar() {
   return (
-    <nav className="fixed z-50 w-full">
+    <nav className="fixed z-50 w-full bg-slate-50/10 shadow-sm">
       <div className="container mx-auto flex flex-col items-center gap-5 px-5 py-5 md:flex-row md:justify-between lg:px-0">
         <Link
           href="/"
@@ -19,7 +19,7 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font- cursor-pointer text-sm text-nowrap md:text-base"
+                className="cursor-pointer font-sans text-sm text-nowrap md:text-base"
               >
                 {link.title}
               </Link>
