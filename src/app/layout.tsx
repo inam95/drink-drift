@@ -37,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${monaSans.variable} ${modernNegra.variable} ${dmSerifText.variable} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>
