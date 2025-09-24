@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import { Wine } from "lucide-react";
 
 import { CocktailCard } from "@/components/cocktail-card";
 import Loading from "@/components/loading";
@@ -8,8 +7,6 @@ import { SearchInput } from "@/components/search-input";
 import { searchCocktails } from "@/lib/api";
 import { loadSearchParams } from "@/lib/search-params";
 import { EmptyQueryState } from "@/components/empty-query-state";
-
-// Empty Query State Component
 
 export default async function SearchPage({
   searchParams

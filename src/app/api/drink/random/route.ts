@@ -19,8 +19,6 @@ export async function GET(req: NextRequest) {
     const maxAttempts = count * 5;
     let attempts = 0;
 
-    console.log(`Fetching ${count} unique random drinks...`);
-
     // Keep fetching until we have the requested count of unique drinks
     while (uniqueDrinks.size < count && attempts < maxAttempts) {
       attempts++;
@@ -36,9 +34,6 @@ export async function GET(req: NextRequest) {
         if (data.drinks && data.drinks.length > 0) {
           const drink = data.drinks[0];
           uniqueDrinks.set(drink.idDrink, drink);
-          console.log(
-            `Attempt ${attempts}: Added ${drink.strDrink} (${drink.idDrink})`
-          );
         }
 
         // Small delay to avoid rapid-fire requests
@@ -49,9 +44,6 @@ export async function GET(req: NextRequest) {
     }
 
     const result = Array.from(uniqueDrinks.values());
-    console.log(
-      `Final result: ${result.length} unique drinks after ${attempts} attempts`
-    );
 
     return NextResponse.json({
       data: {
