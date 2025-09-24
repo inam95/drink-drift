@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,53 +14,34 @@ import {
 import { cn } from "@/lib/utils";
 import { CocktailCard } from "./cocktail-card";
 import { Cocktail } from "@/lib/api";
+import { RefreshCw } from "lucide-react";
 
 export interface RandomCocktailGalleryProps {
-  items?: Cocktail[];
+  initialItems?: Cocktail[];
 }
 
-const data = [
-  {
-    idDrink: "12772",
-    strDrink: "Iced Coffee Fillip",
-    strCategory: "Coffee / Tea",
-    strDrinkThumb:
-      "https://www.thecocktaildb.com/images/media/drink/sxtxrp1454514223.jpg/large"
-  },
-  {
-    idDrink: "12618",
-    strDrink: "Orangeade",
-    strCategory: "Cocktail",
-    strDrinkThumb:
-      "https://www.thecocktaildb.com/images/media/drink/ytsxxw1441167732.jpg/large"
-  },
-  {
-    idDrink: "13196",
-    strDrink: "Long vodka",
-    strCategory: "Ordinary Drink",
-    strDrinkThumb:
-      "https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg/large"
-  },
-  {
-    idDrink: "17268",
-    strDrink: "Blue Hurricane",
-    strCategory: "Cocktail",
-    strDrinkThumb:
-      "https://www.thecocktaildb.com/images/media/drink/nwx02s1515795822.jpg/large"
-  },
-  {
-    idDrink: "14586",
-    strDrink: "Orange Push-up",
-    strCategory: "Ordinary Drink",
-    strDrinkThumb:
-      "https://www.thecocktaildb.com/images/media/drink/mgf0y91503565781.jpg/large"
-  }
-];
-
 export function RandomCocktailGallery({
-  items = data
+  initialItems = []
 }: RandomCocktailGalleryProps) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [items, setItems] = useState<Cocktail[]>(initialItems);
+
+  const [isPending, startTransition] = useTransition();
+
+  const fetchNewCocktails = async () => {
+    startTransition(async () => {
+      try {
+        const response = await fetch("/api/drink/random?count=5");
+        if (!response.ok) {
+          throw new Error("Failed to fetch new cocktails");
+        }
+        const data = await response.json();
+        setItems(data.data.drinks);
+      } catch (error) {
+        console.error("Error fetching new cocktails:", error);
+      }
+    });
+  };
 
   useEffect(() => {
     if (!carouselApi) {
@@ -71,6 +52,18 @@ export function RandomCocktailGallery({
   return (
     <section className="container mx-auto">
       <div className="mx-auto w-[70%]">
+        <div className="mb-4 flex justify-center">
+          <Button
+            onClick={fetchNewCocktails}
+            disabled={isPending}
+            variant="outline"
+            size="sm"
+            className="gap-2"
+          >
+            <RefreshCw className={cn("h-4 w-4", isPending && "animate-spin")} />
+            {isPending ? "Loading..." : "Refresh Cocktails"}
+          </Button>
+        </div>
         <Carousel
           setApi={setCarouselApi}
           opts={{

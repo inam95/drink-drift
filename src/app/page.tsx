@@ -48,7 +48,7 @@ export default async function Home() {
         height={478}
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <RandomCocktailGallery items={drinks} />
+        <RandomCocktailGallery initialItems={drinks} />
       </Suspense>
       <div className="container mx-auto mt-10 flex items-end justify-between">
         <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 md:mb-16 lg:flex-row lg:items-end">
