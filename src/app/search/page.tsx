@@ -46,7 +46,7 @@ export default async function SearchPage({
         {/* Header Section */}
         <div className="mb-6">
           <div className="mt-24 space-y-2 text-center md:mt-16">
-            <h1 className="text-left font-sans text-4xl font-bold md:text-5xl">
+            <h1 className="text-center font-sans text-4xl font-bold md:text-left md:text-5xl">
               Cocktail Explorer
             </h1>
           </div>
@@ -75,10 +75,7 @@ export default async function SearchPage({
               <Suspense fallback={<Loading />}>
                 <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {cocktails.map((cocktail) => (
-                    <div
-                      key={cocktail.idDrink}
-                      className="group max-w-[300px] lg:max-w-[320px]"
-                    >
+                    <div key={cocktail.idDrink} className="group w-full">
                       <CocktailCard key={cocktail.idDrink} item={cocktail} />
                     </div>
                   ))}

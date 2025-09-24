@@ -51,7 +51,7 @@ export default async function Home() {
         <RandomCocktailGallery initialItems={drinks} />
       </Suspense>
       <div className="container mx-auto mt-10 flex items-end justify-between">
-        <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 md:mb-16 lg:flex-row lg:items-end">
+        <div className="mx-auto mb-10 flex w-full flex-col items-center justify-between gap-10 md:mb-16 lg:flex-row lg:items-end">
           <div className="hidden space-y-5 md:block">
             <p className="font-sans font-semibold">Cool. Crisp. Classic.</p>
             <p className="font-modern-negra text-yellow-text max-w-xl text-6xl">
@@ -59,7 +59,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="w-full space-y-5 text-lg md:max-w-xs lg:max-w-2xs">
+          <div className="z-10 max-w-2xs space-y-5 text-lg md:max-w-xs lg:max-w-2xs">
             <p className="text-left">
               Every cocktail on our menu is a blend of premium ingredients,
               creative flair, and timeless recipes — designed to delight your
