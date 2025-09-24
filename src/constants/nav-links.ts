@@ -6,5 +6,9 @@ export const navLinks = [
   {
     href: "/search",
     title: "Search"
+  },
+  {
+    href: "/favorites",
+    title: "Favorites"
   }
 ];

@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
+import { Cocktail } from "./types";
 
 export type FavoritesStore = {
-  favorites: string[];
-  addFavorite: (id: string) => void;
-  removeFavorite: (id: string) => void;
+  favorites: Cocktail[];
+  addFavorite: (id: Cocktail) => void;
+  removeFavorite: (id: Cocktail) => void;
 };
 
 export const useFavoritesStore = create<FavoritesStore>()(
@@ -12,11 +13,13 @@ export const useFavoritesStore = create<FavoritesStore>()(
     persist(
       (set) => ({
         favorites: [],
-        addFavorite: (id: string) =>
+        addFavorite: (id: Cocktail) =>
           set((state) => ({ favorites: [...state.favorites, id] })),
-        removeFavorite: (id: string) =>
+        removeFavorite: (id: Cocktail) =>
           set((state) => ({
-            favorites: state.favorites.filter((favorite) => favorite !== id)
+            favorites: state.favorites.filter(
+              (favorite) => favorite.idDrink !== id.idDrink
+            )
           }))
       }),
       {

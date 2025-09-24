@@ -19,15 +19,19 @@ export function FavoriteButton({ item }: { item: Cocktail }) {
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (favorites.includes(item.idDrink)) {
-          removeFavorite(item.idDrink);
+        if (favorites.some((favorite) => favorite.idDrink === item.idDrink)) {
+          removeFavorite(item);
         } else {
-          addFavorite(item.idDrink);
+          addFavorite(item);
         }
       }}
     >
       <Heart
-        fill={favorites.includes(item.idDrink) ? "currentColor" : "none"}
+        fill={
+          favorites.some((favorite) => favorite.idDrink === item.idDrink)
+            ? "currentColor"
+            : "none"
+        }
         className="h-5 w-5 text-red-600 transition-colors duration-300 hover:text-red-500"
       />
     </Button>
