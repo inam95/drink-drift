@@ -26,7 +26,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col items-center gap-10">
-      <h1 className="font-modern-negra mt-32 text-center text-6xl leading-none md:mt-20 md:text-[6vw]">
+      <h1 className="font-modern-negra mt-32 text-center text-6xl leading-none md:mt-24 md:text-[6vw]">
         COCKTAILS
       </h1>
       <Image

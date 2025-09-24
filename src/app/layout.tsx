@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/navbar";
 import localFont from "next/font/local";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
+import { Navbar } from "@/components/navbar";
 
 import "./globals.css";
 
@@ -38,7 +40,9 @@ export default function RootLayout({
         className={`${monaSans.variable} ${modernNegra.variable} ${dmSerifText.variable} antialiased`}
       >
         <Navbar />
-        <main className="container mx-auto">{children}</main>
+        <main className="container mx-auto">
+          <NuqsAdapter>{children}</NuqsAdapter>
+        </main>
       </body>
     </html>
   );

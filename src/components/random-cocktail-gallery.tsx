@@ -13,52 +13,46 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { CocktailCard } from "./cocktail-card";
-
-export interface RandomCocktailGalleryItem {
-  id: string;
-  name: string;
-  category: string;
-  image: string;
-}
+import { Cocktail } from "@/lib/api";
 
 export interface RandomCocktailGalleryProps {
-  items?: RandomCocktailGalleryItem[];
+  items?: Cocktail[];
 }
 
 const data = [
   {
-    id: "12772",
-    name: "Iced Coffee Fillip",
-    category: "Coffee / Tea",
-    image:
+    idDrink: "12772",
+    strDrink: "Iced Coffee Fillip",
+    strCategory: "Coffee / Tea",
+    strDrinkThumb:
       "https://www.thecocktaildb.com/images/media/drink/sxtxrp1454514223.jpg/large"
   },
   {
-    id: "12618",
-    name: "Orangeade",
-    category: "Cocktail",
-    image:
+    idDrink: "12618",
+    strDrink: "Orangeade",
+    strCategory: "Cocktail",
+    strDrinkThumb:
       "https://www.thecocktaildb.com/images/media/drink/ytsxxw1441167732.jpg/large"
   },
   {
-    id: "13196",
-    name: "Long vodka",
-    category: "Ordinary Drink",
-    image:
+    idDrink: "13196",
+    strDrink: "Long vodka",
+    strCategory: "Ordinary Drink",
+    strDrinkThumb:
       "https://www.thecocktaildb.com/images/media/drink/9179i01503565212.jpg/large"
   },
   {
-    id: "17268",
-    name: "Blue Hurricane",
-    category: "Cocktail",
-    image:
+    idDrink: "17268",
+    strDrink: "Blue Hurricane",
+    strCategory: "Cocktail",
+    strDrinkThumb:
       "https://www.thecocktaildb.com/images/media/drink/nwx02s1515795822.jpg/large"
   },
   {
-    id: "14586",
-    name: "Orange Push-up",
-    category: "Ordinary Drink",
-    image:
+    idDrink: "14586",
+    strDrink: "Orange Push-up",
+    strCategory: "Ordinary Drink",
+    strDrinkThumb:
       "https://www.thecocktaildb.com/images/media/drink/mgf0y91503565781.jpg/large"
   }
 ];
@@ -90,7 +84,7 @@ export function RandomCocktailGallery({
           <CarouselContent className="my-2 ml-0">
             {items.map((item, index) => (
               <CarouselItem
-                key={item.id}
+                key={item.idDrink}
                 className={cn("group max-w-[300px] pl-5 lg:max-w-[320px]", {
                   "pl-0": index === 0
                 })}
