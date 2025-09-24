@@ -47,7 +47,7 @@ export default async function Home() {
         <RandomCocktailGallery />
       </Suspense>
       <div className="container mx-auto mt-10 flex items-end justify-between">
-        <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 lg:flex-row lg:items-end">
+        <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 md:mb-16 lg:flex-row lg:items-end">
           <div className="hidden space-y-5 md:block">
             <p className="font-sans font-semibold">Cool. Crisp. Classic.</p>
             <p className="font-modern-negra text-yellow-text max-w-xl text-6xl">
