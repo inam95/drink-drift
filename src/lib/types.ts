@@ -3,4 +3,8 @@ export interface Cocktail {
   strDrink: string;
   strDrinkThumb: string;
   strCategory: string;
+  strAlcoholic: string;
+  strInstructions: string;
+  strIBA?: string;
+  strTags?: string;
 }

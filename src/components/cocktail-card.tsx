@@ -1,10 +1,11 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { Cocktail } from "@/lib/types";
 import { FavoriteButton } from "@/components/favorite-button";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Cocktail } from "@/lib/types";
 
 export function CocktailCard({ item }: { item: Cocktail }) {
   return (
@@ -44,13 +45,17 @@ export function CocktailCard({ item }: { item: Cocktail }) {
 
       {/* Footer with Action */}
       <CardFooter className="p-6 pt-0">
-        <Button
-          variant="outline"
-          className="w-full border-yellow-200 font-sans text-yellow-700 transition-all duration-300 group-hover:shadow-md hover:border-yellow-300 hover:bg-yellow-50"
+        <Link
+          href={`/cocktail/${item.idDrink}`}
+          className={buttonVariants({
+            variant: "outline",
+            className:
+              "w-full border-yellow-200 font-sans text-yellow-700 transition-all duration-300 group-hover:shadow-md hover:border-yellow-300 hover:bg-yellow-50"
+          })}
         >
           View
           <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
