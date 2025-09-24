@@ -19,7 +19,7 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="cursor-pointer font-sans text-sm text-nowrap md:text-base"
+                className="hover:text-yellow-text cursor-pointer font-sans text-sm font-semibold text-nowrap md:text-base"
               >
                 {link.title}
               </Link>

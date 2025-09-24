@@ -1,9 +1,10 @@
 import Image from "next/image";
-
-import { Card, CardContent, CardFooter } from "./ui/card";
 import { ArrowRight } from "lucide-react";
-import { Button } from "./ui/button";
+
 import { Cocktail } from "@/lib/api";
+import { FavoriteButton } from "@/components/favorite-button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 export function CocktailCard({ item }: { item: Cocktail }) {
   return (
@@ -24,6 +25,11 @@ export function CocktailCard({ item }: { item: Cocktail }) {
           <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-gray-700 shadow-lg backdrop-blur-sm">
             {item.strCategory}
           </span>
+        </div>
+
+        {/* Heart Button */}
+        <div className="absolute top-4 right-4">
+          <FavoriteButton item={item} />
         </div>
       </div>
 
@@ -46,9 +52,6 @@ export function CocktailCard({ item }: { item: Cocktail }) {
           <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Button>
       </CardFooter>
-
-      {/* Subtle Border Animation */}
-      <div className="absolute inset-0 rounded-lg border-2 border-transparent bg-gradient-to-r from-yellow-400/20 via-transparent to-yellow-400/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </Card>
   );
 }

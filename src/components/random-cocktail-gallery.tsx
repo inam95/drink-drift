@@ -12,7 +12,7 @@ import {
   CarouselPrevious
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import { CocktailCard } from "./cocktail-card";
+import { CocktailCard } from "@/components/cocktail-card";
 import { Cocktail } from "@/lib/api";
 import { RefreshCw } from "lucide-react";
 
