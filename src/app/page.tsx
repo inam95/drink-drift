@@ -2,27 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
-import { CardContent } from "@/components/ui/card";
-import { Card } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from "@/components/ui/carousel";
-import { Cocktail, fetchRandomCocktails } from "@/lib/api";
 import { RandomCocktailGallery } from "@/components/random-cocktail-gallery";
+import { Cocktail } from "@/lib/api";
 
 export default async function Home() {
-  const result = await fetch(
-    "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/drink/random?count=5`,
+    {
+      cache: "no-store"
+    }
   );
-  const { drinks } = (await result.json()) as { drinks: Cocktail[] };
 
-  const drink = drinks[0];
+  if (!response.ok) {
+    console.error("Failed to fetch drinks:", response.statusText);
+    return (
+      <div className="flex flex-col items-center gap-10">
+        <h1 className="font-modern-negra mt-32 text-center text-6xl leading-none md:mt-24 md:text-[6vw]">
+          COCKTAILS
+        </h1>
+        <p className="text-center text-lg">Error loading drinks</p>
+      </div>
+    );
+  }
 
-  console.log(drink);
+  const data = await response.json();
+  const drinks: Cocktail[] = data.data.drinks;
 
   return (
     <div className="flex flex-col items-center gap-10">
@@ -44,7 +48,7 @@ export default async function Home() {
         height={478}
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <RandomCocktailGallery />
+        <RandomCocktailGallery items={drinks} />
       </Suspense>
       <div className="container mx-auto mt-10 flex items-end justify-between">
         <div className="mx-auto flex w-full flex-col items-center justify-between gap-10 md:mb-16 lg:flex-row lg:items-end">

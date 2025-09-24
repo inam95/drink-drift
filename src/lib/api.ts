@@ -1,4 +1,4 @@
-const API_BASE = "https://www.thecocktaildb.com/api/json/v1/1";
+import { API_BASE } from "@/constants/api";
 
 export interface Cocktail {
   idDrink: string;
@@ -18,5 +18,3 @@ export async function searchCocktails(query: string) {
   const data = (await res.json()) as { drinks: Cocktail[] };
   return data.drinks || [];
 }
-
-export async function fetchRandomCocktails(count: number) {}
