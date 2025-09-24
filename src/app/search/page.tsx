@@ -1,108 +1,15 @@
-import { searchCocktails } from "@/lib/api";
 import { Suspense } from "react";
-import { SearchInput } from "@/components/search-input";
+import { Wine } from "lucide-react";
+
 import { CocktailCard } from "@/components/cocktail-card";
+import Loading from "@/components/loading";
+import { NoResultsState } from "@/components/no-result";
+import { SearchInput } from "@/components/search-input";
+import { searchCocktails } from "@/lib/api";
 import { loadSearchParams } from "@/lib/search-params";
-import { Search, Sparkles, Wine, AlertCircle, Loader2 } from "lucide-react";
+import { EmptyQueryState } from "@/components/empty-query-state";
 
 // Empty Query State Component
-function EmptyQueryState() {
-  return (
-    <div className="flex flex-col items-center justify-center space-y-6 py-20">
-      <div className="rounded-full bg-gradient-to-br from-blue-100 to-purple-100 p-6 dark:from-blue-900/20 dark:to-purple-900/20">
-        <Wine className="h-16 w-16 text-blue-600 dark:text-blue-400" />
-      </div>
-      <div className="space-y-3 text-center">
-        <h3 className="text-foreground text-2xl font-semibold">
-          Ready to Explore?
-        </h3>
-        <p className="text-muted-foreground max-w-md">
-          Start your cocktail journey by typing a cocktail name, ingredient, or
-          style in the search bar above.
-        </p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-2">
-        {["Margarita", "Mojito", "Old Fashioned", "Cosmopolitan"].map(
-          (suggestion) => (
-            <span
-              key={suggestion}
-              className="bg-muted text-muted-foreground hover:bg-muted/80 cursor-pointer rounded-full px-3 py-1 text-sm transition-colors"
-            >
-              {suggestion}
-            </span>
-          )
-        )}
-      </div>
-    </div>
-  );
-}
-
-// No Results State Component
-function NoResultsState({ query }: { query: string }) {
-  return (
-    <div className="flex flex-col items-center justify-center space-y-6 py-20">
-      <div className="rounded-full bg-gradient-to-br from-orange-100 to-red-100 p-6 dark:from-orange-900/20 dark:to-red-900/20">
-        <AlertCircle className="h-16 w-16 text-orange-600 dark:text-orange-400" />
-      </div>
-      <div className="space-y-3 text-center">
-        <h3 className="text-foreground text-2xl font-semibold">
-          No Cocktails Found
-        </h3>
-        <p className="text-muted-foreground max-w-md">
-          We couldn't find any cocktails matching "{query}". Try searching with
-          different keywords or check your spelling.
-        </p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-2">
-        {["Martini", "Daiquiri", "Whiskey Sour", "Gin Fizz"].map(
-          (suggestion) => (
-            <span
-              key={suggestion}
-              className="bg-muted text-muted-foreground hover:bg-muted/80 cursor-pointer rounded-full px-3 py-1 text-sm transition-colors"
-            >
-              {suggestion}
-            </span>
-          )
-        )}
-      </div>
-    </div>
-  );
-}
-
-// Loading State Component
-function LoadingState() {
-  return (
-    <div className="flex flex-col items-center justify-center space-y-6 py-20">
-      <div className="rounded-full bg-gradient-to-br from-green-100 to-blue-100 p-6 dark:from-green-900/20 dark:to-blue-900/20">
-        <Loader2 className="h-16 w-16 animate-spin text-green-600 dark:text-green-400" />
-      </div>
-      <div className="space-y-3 text-center">
-        <h3 className="text-foreground text-2xl font-semibold">
-          Mixing Up Results
-        </h3>
-        <p className="text-muted-foreground">
-          Searching through our cocktail database...
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Results Grid Component
-function ResultsGrid({ cocktails }: { cocktails: any[] }) {
-  return (
-    <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {cocktails.map((cocktail) => (
-        <div
-          key={cocktail.idDrink}
-          className="group max-w-[300px] lg:max-w-[320px]"
-        >
-          <CocktailCard key={cocktail.idDrink} item={cocktail} />
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default async function SearchPage({
   searchParams
@@ -148,8 +55,17 @@ export default async function SearchPage({
                   Results for "{query}"
                 </p>
               </div>
-              <Suspense fallback={<LoadingState />}>
-                <ResultsGrid cocktails={cocktails} />
+              <Suspense fallback={<Loading />}>
+                <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {cocktails.map((cocktail) => (
+                    <div
+                      key={cocktail.idDrink}
+                      className="group max-w-[300px] lg:max-w-[320px]"
+                    >
+                      <CocktailCard key={cocktail.idDrink} item={cocktail} />
+                    </div>
+                  ))}
+                </div>
               </Suspense>
             </div>
           )}
