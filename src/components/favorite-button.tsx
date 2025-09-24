@@ -3,7 +3,7 @@
 import { Heart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Cocktail } from "@/lib/api";
+import { Cocktail } from "@/lib/types";
 import { useFavoritesStore } from "@/lib/store";
 
 export function FavoriteButton({ item }: { item: Cocktail }) {

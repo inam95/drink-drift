@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { CocktailCard } from "@/components/cocktail-card";
-import { Cocktail } from "@/lib/api";
+import { Cocktail } from "@/lib/types";
 import { RefreshCw } from "lucide-react";
 
 export interface RandomCocktailGalleryProps {

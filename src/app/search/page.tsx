@@ -4,7 +4,7 @@ import { CocktailCard } from "@/components/cocktail-card";
 import Loading from "@/components/loading";
 import { NoResultsState } from "@/components/no-result";
 import { SearchInput } from "@/components/search-input";
-import { searchCocktails } from "@/lib/api";
+import { Cocktail } from "@/lib/types";
 import { loadSearchParams } from "@/lib/search-params";
 import { EmptyQueryState } from "@/components/empty-query-state";
 
@@ -14,7 +14,27 @@ export default async function SearchPage({
   searchParams: Promise<{ query: string }>;
 }) {
   const { query } = await loadSearchParams(searchParams);
-  const cocktails = await searchCocktails(query);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/drink/search?query=${query}`,
+    {
+      cache: "no-store"
+    }
+  );
+
+  if (!response.ok) {
+    console.error("Failed to fetch cocktails:", response.statusText);
+    return (
+      <div className="flex flex-col items-center gap-10">
+        <h1 className="font-modern-negra mt-32 text-center text-6xl leading-none md:mt-24 md:text-[6vw]">
+          COCKTAILS
+        </h1>
+        <p className="text-center text-lg">Error loading drinks</p>
+      </div>
+    );
+  }
+
+  const data = await response.json();
+  const cocktails: Cocktail[] = data.data;
 
   const isQueryEmpty = query === "";
   const isCocktailsEmpty = query && cocktails.length === 0;

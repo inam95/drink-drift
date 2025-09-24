@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { Cocktail } from "@/lib/api";
+import { Cocktail } from "@/lib/types";
 import { API_BASE } from "@/constants/api";
 
 export async function GET(req: NextRequest) {

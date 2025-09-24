@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-import { Cocktail } from "@/lib/api";
+import { Cocktail } from "@/lib/types";
 import { FavoriteButton } from "@/components/favorite-button";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { RandomCocktailGallery } from "@/components/random-cocktail-gallery";
-import { Cocktail } from "@/lib/api";
+import { Cocktail } from "@/lib/types";
 
 export default async function Home() {
   const response = await fetch(
