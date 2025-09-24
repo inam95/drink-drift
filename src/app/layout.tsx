@@ -38,7 +38,7 @@ export default function RootLayout({
         className={`${monaSans.variable} ${modernNegra.variable} ${dmSerifText.variable} antialiased`}
       >
         <Navbar />
-        {children}
+        <main className="container mx-auto">{children}</main>
       </body>
     </html>
   );
